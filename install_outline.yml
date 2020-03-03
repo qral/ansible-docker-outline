@@ -1,0 +1,14 @@
+---
+- hosts: ultravps
+  tasks:
+    - name: Outline bash installation script 
+      # https://github.com/Jigsaw-Code/outline-server/tree/master/src/shadowbox
+      shell: bash -c "$(wget -qO- https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/server_manager/install_scripts/install_server.sh)"
+      register: cmdo
+      args:
+        executable: /bin/bash
+    - debug: 
+        msg: 
+          - "{{ cmdo.stdout_lines }}"
+          - "--- COPY LINES BELOW to Outline Manager ---"
+          - "{{ cmdo.stdout | regex_search('({.+})') }}"

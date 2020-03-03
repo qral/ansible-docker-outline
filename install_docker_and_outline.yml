@@ -1,0 +1,8 @@
+---
+- hosts: ultravps
+  # Install Docker
+  roles:
+    - geerlingguy.docker
+
+- name: Install Outline
+  import_playbook: install_outline.yml
